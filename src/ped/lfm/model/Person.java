@@ -2,33 +2,53 @@ package ped.lfm.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.bson.types.ObjectId;
+import org.hibernate.search.annotations.Indexed;
 
 @Entity
-@Table(name = "Person")
 public class Person implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId PersonID;
+	@GeneratedValue
+	private long id;
+	
+	@Column(name="PersonCode")
 	private String PersonCode;
+	
+	@Column(name="FirstName")
 	private String FirstName;
+	
+	@Column(name="LastName")
 	private String LastName;
+	
+	@Column(name="GenderType")
 	private String GenderType;
+	
+	@Column(name="Nationality")
 	private String Nationality;
+	
+	@Column(name="NationalityFullName")
 	private String NationalityFullName;
+	
+	@Column(name="Marital")
 	private Integer Marital;
+	
+	@Column(name="BirthDate")
 	private Date BirthDate;
-	public ObjectId getPersonID() {
-		return PersonID;
+	
+	
+	public long getId() {
+		return id;
 	}
-	public void setPersonID(ObjectId personID) {
-		PersonID = personID;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getPersonCode() {
 		return PersonCode;
@@ -82,8 +102,8 @@ public class Person implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Person [PersonID=");
-		builder.append(PersonID);
+		builder.append("Person [id=");
+		builder.append(id);
 		builder.append(", PersonCode=");
 		builder.append(PersonCode);
 		builder.append(", FirstName=");
