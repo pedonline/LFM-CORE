@@ -28,7 +28,7 @@
 	<classpathentry kind="lib" path="lib/hibernate-ogm-core-5.4.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-ogm-infinispan-embedded-5.4.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-ogm-infinispan-remote-5.4.0.Final.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-ogm-mongodb-5.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-ogm-mongodb-5.4.0.Final.jar" sourcepath="C:/Users/ped/AppData/Local/Temp/.org.sf.feeling.decompiler1543730737449/source/hibernate-ogm-mongodb-5.4.0.Final-sources.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-ogm-neo4j-5.4.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-search-engine-5.10.4.Final.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-search-orm-5.10.4.Final.jar"/>
