@@ -17,7 +17,7 @@ public class PersonTest {
 		lo_ps.setFirstName("weerayut");
 		lo_ps.setLastName("wichaidit");
 		try {
-			lo_ps = PersonDAO.Add(MyHSs, lo_ps);
+			lo_ps = PersonDAO.Add(MyHSs, lo_ps,"Pedonline", null, null);
 			MyHTs.commit();
 		} catch (Exception ex) {
 			CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "Add",  ex.toString());		
@@ -50,9 +50,9 @@ public class PersonTest {
 		Transaction MyHTs = MyHSs.beginTransaction();
 		Person lo_ps = null;
 		try {
-			lo_ps = PersonDAO.GetByID(MyHSs, 2, null, null);
+			lo_ps = PersonDAO.GetByID(MyHSs,6, null, null);
 			lo_ps.setPersonCode("XXXXXXXXX");
-			lo_ps = PersonDAO.Modify(MyHSs, lo_ps);
+			lo_ps = PersonDAO.Modify(MyHSs, lo_ps,"Pedonline", null, null);
 			MyHTs.commit();
 		} catch (Exception ex) {
 			CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "GetByID",  ex.toString());		
@@ -69,8 +69,8 @@ public class PersonTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		UTTestAdd();
-		UTTestGetByID();
-//		UTTestModify();
+//		UTTestGetByID();
+		UTTestModify();
 	}
 
 }
