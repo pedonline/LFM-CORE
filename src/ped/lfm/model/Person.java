@@ -10,14 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.bson.types.ObjectId;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.search.annotations.Indexed;
 
 @Entity
+@Indexed
 public class Person implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	private long id;
+	private long PersonID;
 	
 	@Column(name="PersonCode")
 	private String PersonCode;
@@ -43,12 +45,13 @@ public class Person implements Serializable{
 	@Column(name="BirthDate")
 	private Date BirthDate;
 	
+		
 	
-	public long getId() {
-		return id;
+	public long getPersonID() {
+		return PersonID;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setPersonID(long personID) {
+		PersonID = personID;
 	}
 	public String getPersonCode() {
 		return PersonCode;
@@ -102,8 +105,8 @@ public class Person implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Person [id=");
-		builder.append(id);
+		builder.append("Person [PersonID=");
+		builder.append(PersonID);
 		builder.append(", PersonCode=");
 		builder.append(PersonCode);
 		builder.append(", FirstName=");
