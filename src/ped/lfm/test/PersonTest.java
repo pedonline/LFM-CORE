@@ -1,5 +1,7 @@
 package ped.lfm.test;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -33,7 +35,7 @@ public class PersonTest {
 	public static void UTTestGetByID() {
 		Session MyHSs = HibernateUtil.getSession();
 		try {
-			Person lo_ps = PersonDAO.GetByID(MyHSs, 2, null, null);
+			Person lo_ps = PersonDAO.GetByID(MyHSs, 6, null, null);
 			System.out.println(lo_ps);
 		} catch (Exception ex) {
 			CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "GetByID",  ex.toString());		
@@ -64,13 +66,24 @@ public class PersonTest {
 		System.out.println(lo_ps);
 		
 	}
+	
+	public static void UTTestFindAll(int BeginRow, int MaxRow) throws Exception {
+		Session MyHSs = HibernateUtil.getSession();
+//		
+		List<Person> lo_List = PersonDAO.FindAll(MyHSs,null,null,BeginRow, MaxRow);
+		for (int i = 0; i < lo_List.size(); i++) {
+			System.out.println(lo_List.get(i));
+		}
+		
+	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 //		UTTestAdd();
 //		UTTestGetByID();
-		UTTestModify();
+//		UTTestModify();
+		UTTestFindAll(0,0);
 	}
 
 }
