@@ -1,6 +1,8 @@
 package ped.lfm.dao;
 
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 
 import org.hibernate.Session;
@@ -97,6 +99,35 @@ public class PersonDAO {
 		} else {
 			CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "GetByID", "[Not Found] @@@");
 			throw new DataNotFoundException("PersonID [" + ai_PersonID + "] is not found.");
+		}
+	}
+	
+	public static List<Person> FindAll(Session MyHSs,Integer SUID,Integer SGID, int BeginRow, int MaxRow,int... StatusList) throws DataNotFoundException, Exception {
+		assert BeginRow < 0 : "BeginRow is less than 0";
+		assert MaxRow < 0 : "MaxRow is less than 0";
+		CommonLog.Print(LOG_LEVEL.INFO_LEVEL, "PersonDAO", "FindAll", "[START] @@@");
+		try {
+//			String ls_SQLCommand = GenSQLALL(20,SUID,SGID,StatusList);
+//			CommonLog.Print(LOG_LEVEL.INFO_LEVEL, "AgriculturistDAO", "FindAll", ls_SQLCommand);		
+			String ls_SQLCommand = "SELECT ps FROM Person ps ";
+
+			Query query = MyHSs.createQuery(ls_SQLCommand);
+			query.setFirstResult(BeginRow);
+			if (MaxRow > 0) {
+				query.setMaxResults(MaxRow);
+			}			
+			CommonLog.Print(LOG_LEVEL.INFO_LEVEL, "PersonDAO", "Query : ",query.getQueryString()+ " @@@");
+			List<Person> PersonList = query.getResultList();
+			if (PersonList.isEmpty() != true) {
+				return PersonList;
+			} else {
+				CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "FindAll", "[Not Found] @@@");
+				throw new DataNotFoundException("Find Person By All is not found.");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
 		}
 	}
 
