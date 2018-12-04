@@ -95,7 +95,9 @@ public class HibernateUtil {
 //			cfg.addAnnotatedClass(rbac.model.UserAssetPermissionPK.class);
 			cfg.addPackage("ped.lfm.model");
 			cfg.setProperty("javax.persistence.provider","org.hibernate.ogm.jpa.HibernateOgmPersistence");
-
+//			cfg.setProperty(Environment.TRANSACTION_COORDINATOR_STRATEGY,"jta");
+//			cfg.setProperty(Environment.JTA_PLATFORM,"JBossTS");
+			cfg.setProperty("hibernate.ogm.datastore.grid_dialect", "org.hibernate.ogm.datastore.mongodb.MongoDBDialect");
 			cfg.setProperty("hibernate.ogm.datastore.create_database", "true");
 			cfg.setProperty("hibernate.ogm.datastore.provider", "mongodb");
 			cfg.setProperty("hibernate.ogm.datastore.database", ls_dbName);
@@ -103,6 +105,7 @@ public class HibernateUtil {
 			cfg.setProperty("hibernate.ogm.datastore.port", li_portDB);
 			cfg.setProperty("hibernate.ogm.datastore.username", ls_userdb);
 			cfg.setProperty("hibernate.ogm.datastore.password", ls_passworddb);
+			
 			
 			cfg.setProperty("hibernate.show_sql", ls_show_sql);
 //			cfg.setProperty("hibernate.hbm2ddl.auto", "update");
