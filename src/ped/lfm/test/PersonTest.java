@@ -80,9 +80,9 @@ public class PersonTest {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-//		UTTestAdd();
-//		UTTestGetByID();
-//		UTTestModify();
+		UTTestAdd();
+		UTTestGetByID();
+		UTTestModify();
 		UTTestFindAll(0,0);
 	}
 
