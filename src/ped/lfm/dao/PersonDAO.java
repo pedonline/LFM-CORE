@@ -4,11 +4,11 @@ package ped.lfm.dao;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.ogm.OgmSession;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.neo4j.unsafe.impl.batchimport.input.DataException;
 
@@ -102,6 +102,36 @@ public class PersonDAO {
 		}
 	}
 	
+//	public static Person GetByID2(Session MyHSs, Integer ai_PersonID,Integer SUID,Integer SGID) throws DataNotFoundException {
+//		if(ai_PersonID == null) {
+//			throw new DataException("PersonID [" + ai_PersonID + "] is not found.");
+//		}
+//		Person thePerson = null;
+//		OgmSession session = (OgmSession) MyHSs;
+//		CommonLog.Print(LOG_LEVEL.INFO_LEVEL, "PersonDAO", "GetByID", "[START] @@@");
+////		String query1 = "db.Person.find({ '_id' : "+ai_PersonID+" }) ";
+////		NativeQuery  Query = session.createNativeQuery( query1 ).addEntity( Person.class );
+//		CriteriaBuilder builder = session.getCriteriaBuilder();
+//		CriteriaQuery<Person> criteria = builder.createQuery(Person.class);
+//		Root<Person> from = criteria.from(Person.class);
+//		criteria.select(from);
+//		criteria.where(builder.equal(from.get("PersonID"), ai_PersonID));
+//		Query query = session.createQuery(criteria);
+//		query.setFirstResult(0);
+//		query.setMaxResults(1);
+//		
+//		thePerson = (Person) query.getSingleResult();
+////		CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "Query : ",Query.getQueryString()+ " @@@");
+//		
+////		thePerson =  (Person) Query.uniqueResult();
+//		if (thePerson != null) {
+//			return thePerson;
+//		} else {
+//			CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "GetByID", "[Not Found] @@@");
+//			throw new DataNotFoundException("PersonID [" + ai_PersonID + "] is not found.");
+//		}
+//	}
+	
 	public static List<Person> FindAll(Session MyHSs,Integer SUID,Integer SGID, int BeginRow, int MaxRow,int... StatusList) throws DataNotFoundException, Exception {
 		assert BeginRow < 0 : "BeginRow is less than 0";
 		assert MaxRow < 0 : "MaxRow is less than 0";
@@ -109,7 +139,7 @@ public class PersonDAO {
 		try {
 //			String ls_SQLCommand = GenSQLALL(20,SUID,SGID,StatusList);
 //			CommonLog.Print(LOG_LEVEL.INFO_LEVEL, "AgriculturistDAO", "FindAll", ls_SQLCommand);		
-			String ls_SQLCommand = "SELECT ps FROM Person ps ";
+			String ls_SQLCommand = "SELECT ps FROM Person ps where ps.DataStatus not in ("+TYPE_DATA_STATUS.STATUS_DISABLE.getValue()+","+TYPE_DATA_STATUS.STATUS_DELETE.getValue()+") ";
 
 			Query query = MyHSs.createQuery(ls_SQLCommand);
 			query.setFirstResult(BeginRow);
