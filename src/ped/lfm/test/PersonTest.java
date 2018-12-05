@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import ped.lfm.common.TYPE_DATA_STATUS;
 import ped.lfm.dao.PersonDAO;
 import ped.lfm.model.Person;
 import ped.lfm.model.util.HibernateUtil;
@@ -35,7 +36,7 @@ public class PersonTest {
 	public static void UTTestGetByID() {
 		Session MyHSs = HibernateUtil.getSession();
 		try {
-			Person lo_ps = PersonDAO.GetByID(MyHSs, 6, null, null);
+			Person lo_ps = PersonDAO.GetByID(MyHSs, 1, null, null);
 			System.out.println(lo_ps);
 		} catch (Exception ex) {
 			CommonLog.Print(LOG_LEVEL.ERROR_LEVEL, "PersonDAO", "GetByID",  ex.toString());		
@@ -54,6 +55,7 @@ public class PersonTest {
 		try {
 			lo_ps = PersonDAO.GetByID(MyHSs,6, null, null);
 			lo_ps.setPersonCode("XXXXXXXXX");
+			lo_ps.setDataStatus(TYPE_DATA_STATUS.STATUS_DISABLE.getValue());
 			lo_ps = PersonDAO.Modify(MyHSs, lo_ps,"Pedonline", null, null);
 			MyHTs.commit();
 		} catch (Exception ex) {
